@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For Someone Special ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #16001f, #3b0a45, #19001f);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.8) rotate(30deg);
+                opacity: 0;
+            }
+        }
+
+        /* PASSWORD SCREEN */
+
+        .password-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .password-box {
+            width: min(420px, 95%);
+            padding: 40px 30px;
+            text-align: center;
+
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(15px);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 0 40px rgba(255, 50, 150, 0.25);
+
+            animation: appear 1.5s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .lock {
+            font-size: 55px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .password-box h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .password-box p {
+            color: #ffd8ed;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+            background: rgba(255,255,255,.95);
+            color: #3a073d;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 13px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+
+            background: linear-gradient(45deg, #ff4f9a, #ff87b9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+
+            box-shadow: 0 5px 20px rgba(255, 80, 160, .4);
+
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 30px rgba(255, 80, 160, .7);
+        }
+
+        #error {
+            color: #ff9ac5;
+            margin-top: 15px;
+            min-height: 20px;
+        }
+
+        /* MAIN PAGE */
+
+        .main-page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .main-page.show {
+            display: block;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .birthday-title {
+            font-family: Georgia, serif;
+            font-size: clamp(40px, 8vw, 75px);
+
+            background: linear-gradient(
+                90deg,
+                #fff,
+                #ff9bc7,
+                #fff
+            );
+
+            background-size: 200% auto;
+
+            -webkit-background-clip: text;
+            color: transparent;
+
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #ffd6e9;
+            margin-top: 10px;
+        }
+
+        /* Photo */
+
+        .photo-container {
+            margin: 35px auto;
+            width: 260px;
+            height: 320px;
+            padding: 8px;
+
+            background: white;
+
+            transform: rotate(-2deg);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.5);
+
+            transition: .5s;
+        }
+
+        .photo-container:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Letter */
+
+        .letter {
+            width: min(700px, 95%);
+            margin: 30px auto;
+
+            padding: 40px;
+
+            text-align: left;
+
+            color: #4b2338;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,.9),
+                    rgba(255,245,250,.95)
+                );
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.35);
+
+            position: relative;
+
+            animation: letterOpen 1.5s ease;
+        }
+
+        @keyframes letterOpen {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(20deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .letter::before {
+            content: "💌";
+            position: absolute;
+            top: -25px;
+            right: 25px;
+            font-size: 45px;
+        }
+
+        .letter h2 {
+            font-family: Georgia, serif;
+            color: #b52b67;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .letter p {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            text-align: right;
+            font-family: cursive;
+            font-size: 25px;
+            color: #b52b67;
+            margin-top: 25px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #ffc5dd;
+            font-size: 15px;
+        }
+
+        /* Confetti */
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 14px;
+            top: -20px;
+            animation: fall 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media(max-width:600px) {
+
+            .letter {
+                padding: 25px;
+            }
+
+            .letter p {
+                font-size: 16px;
+            }
+
+            .photo-container {
+                width: 220px;
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating hearts -->
+    <div class="heart" style="left:5%; animation-duration:9s;">❤️</div>
+    <div class="heart" style="left:15%; animation-duration:12s;">💗</div>
+    <div class="heart" style="left:28%; animation-duration:8s;">💕</div>
+    <div class="heart" style="left:45%; animation-duration:11s;">💖</div>
+    <div class="heart" style="left:60%; animation-duration:9s;">❤️</div>
+    <div class="heart" style="left:75%; animation-duration:13s;">💗</div>
+    <div class="heart" style="left:90%; animation-duration:10s;">💖</div>
+
+
+    <!-- PASSWORD SCREEN -->
+
+    <section class="password-screen" id="passwordScreen">
+
+        <div class="password-box">
+
+            <div class="lock">🔐</div>
+
+            <h1>A Little Surprise...</h1>
+
+            <p>
+                There is something special waiting for you. ❤️
+                <br>
+                But first, tell me the secret password.
+            </p>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter the secret password"
+                onkeypress="handleEnter(event)"
+            >
+
+            <button onclick="unlock()">
+                Open My Surprise 💌
+            </button>
+
+            <div id="error"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN BIRTHDAY PAGE -->
+
+    <section class="main-page" id="mainPage">
+
+        <h1 class="birthday-title">
+            Happy Birthday! 🎂
+        </h1>
+
+        <p class="subtitle">
+            To someone who makes the world a little brighter ✨
+        </p>
+
+
+        <!-- PHOTO -->
+
+        <div class="photo-container">
+
+            <!--
+                CHANGE "his-photo.jpg"
+                TO YOUR PHOTO FILE NAME
+            -->
+
+            <img src="./photo.jpeg" alt="Birthday Boy">
+
+        </div>
+
+
+        <!-- LETTER -->
+
+        <div class="letter">
+
+            <h2>Dear Birthday Boy, ❤️</h2>
+
+            <p>
+                Today is not just another day.
+                Today is the day someone truly special came
+                into this world. And honestly, I'm really glad
+                that you did. ✨
+            </p>
+
+            <p>
+                I hope this birthday brings you all the happiness,
+                laughter and beautiful moments that you deserve.
+                May every little dream you've been carrying
+                in your heart slowly turn into reality.
+            </p>
+
+            <p>
+                Keep smiling, keep being the amazing person you are,
+                and never forget how special you are to the people
+                around you. ❤️
+            </p>
+
+            <p>
+                Here's to another year of adventures,
+                crazy memories, late-night conversations,
+                random laughter and countless reasons to smile.
+            </p>
+
+            <p>
+                And maybe... just maybe...
+                this little surprise will become one of your
+                favourite birthday memories. 🥹💕
+            </p>
+
+            <p>
+                Once again,
+                <strong>Happy Birthday! 🎂🎉</strong>
+            </p>
+
+            <div class="signature">
+                With lots of love ❤️
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+            Made especially for you ✨
+            <br>
+            <span>Some surprises are worth unlocking. 💕</span>
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /*
+        =========================================
+        CHANGE PASSWORD HERE
+        =========================================
+        */
+
+        const SECRET_PASSWORD = "Janab";
+
+
+        function handleEnter(event) {
+
+            if (event.key === "Enter") {
+                unlock();
+            }
+
+        }
+
+
+        function unlock() {
+
+            const enteredPassword =
+                document.getElementById("password").value;
+
+            const error =
+                document.getElementById("error");
+
+            if (enteredPassword === SECRET_PASSWORD) {
+
+                document.getElementById("passwordScreen").style.display = "none";
+
+                document.getElementById("mainPage").classList.add("show");
+
+                createConfetti();
+
+            } else {
+
+                error.innerHTML =
+                    "Hmm... that's not the secret. Try again ❤️";
+
+                document.getElementById("password").value = "";
+
+            }
+
+        }
+
+
+        /* CONFETTI */
+
+        function createConfetti() {
+
+            const symbols = ["❤️", "💕", "✨", "🎉", "💖", "⭐"];
+
+            for (let i = 0; i < 80; i++) {
+
+                const confetti =
+                    document.createElement("div");
+
+                confetti.className = "confetti";
+
+                confetti.innerHTML =
+                    symbols[Math.floor(Math.random() * symbols.length)];
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) + "s";
+
+                confetti.style.fontSize =
+                    (Math.random() * 12 + 10) + "px";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
+
