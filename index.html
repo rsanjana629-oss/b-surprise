@@ -389,7 +389,10 @@
 
             <div id="error"></div>
 
+
         </div>
+
+        
 
     </section>
 
@@ -486,7 +489,9 @@
         </div>
 
     </section>
-
+<audio id="birthdayAudio">
+    <source src="./audio.mp3" type="audio/wav">
+</audio>
 
     <script>
 
@@ -523,7 +528,8 @@
                 document.getElementById("mainPage").classList.add("show");
 
                 createConfetti();
-
+const audio = document.getElementById("birthdayAudio");
+audio.play();
             } else {
 
                 error.innerHTML =
@@ -532,6 +538,7 @@
                 document.getElementById("password").value = "";
 
             }
+            
 
         }
 
